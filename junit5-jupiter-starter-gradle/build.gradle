@@ -3,13 +3,17 @@ plugins {
 	id 'idea' // optional (to generate IntelliJ IDEA project files)
 }
 
+// Dossier de build hors de OneDrive (OneDrive verrouille build/ et empêche Gradle de le vider)
+layout.buildDirectory = file("${System.getProperty('user.home')}/gradle-builds/${rootProject.name}")
+
 repositories {
 	mavenCentral()
 }
 
 dependencies {
-	testImplementation(platform('org.junit:junit-bom:5.10.0'))
-	testImplementation('org.junit.jupiter:junit-jupiter')
+	testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+	testImplementation 'org.assertj:assertj-core:3.26.3'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 test {
