@@ -1,18 +1,10 @@
 package com.victor.calculator;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CalculatorTest {
-
-    private Calculator calculator;
-
-    @BeforeEach
-    void setUp() {
-        calculator = new Calculator();
-    }
 
     @Test
     void add_devrait_calculer_la_somme_de_deux_int() {
@@ -21,7 +13,7 @@ class CalculatorTest {
         int b = 3;
 
         // WHEN
-        int resultat = calculator.add(a, b);
+        int resultat = Calculator.add(a, b);
 
         // THEN
         assertThat(resultat).isEqualTo(5);
@@ -34,7 +26,7 @@ class CalculatorTest {
         int opD = 2;
 
         // WHEN
-        int resultat = calculator.divide(opG, opD);
+        int resultat = Calculator.divide(opG, opD);
 
         // THEN
         assertThat(resultat).isEqualTo(5);
