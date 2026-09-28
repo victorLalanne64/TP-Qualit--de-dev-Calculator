@@ -1,5 +1,6 @@
 package com.victor.calculator;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -62,5 +63,27 @@ class CalculatorTest {
 
         // THEN
         assertThat(resultat).containsExactlyInAnyOrder(6, 7, 9);
+    }
+
+    @Test
+    void divide_devrait_lever_exception_si_division_par_zero() {
+        // GIVEN
+        int opG = 10;
+        int opD = 0;
+
+        // WHEN & THEN
+        assertThatThrownBy(() -> Calculator.divide(opG, opD))
+                .isInstanceOf(ArithmeticException.class);
+    }
+
+    @Test
+    void add_devrait_lever_exception_si_overflow() {
+        // GIVEN
+        int opG = Integer.MAX_VALUE;
+        int opD = 1;
+
+        // WHEN & THEN
+        assertThatThrownBy(() -> Calculator.add(opG, opD))
+                .isInstanceOf(ArithmeticException.class);
     }
 }
