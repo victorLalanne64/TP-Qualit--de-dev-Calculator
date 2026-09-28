@@ -1,0 +1,35 @@
+name: Build et tests (Gradle)
+
+on:
+  push:
+    branches: [ "**" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: junit5-jupiter-starter-gradle
+
+    steps:
+      - name: Récupération du code
+        uses: actions/checkout@v4
+
+      - name: Installation du JDK 26 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          java-version: '26'
+          distribution: 'temurin'
+
+      - name: Configuration de Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Rendre gradlew exécutable
+        run: chmod +x ./gradlew
+
+      - name: Construction et tests
+        run: ./gradlew build #JacocoTestReport
