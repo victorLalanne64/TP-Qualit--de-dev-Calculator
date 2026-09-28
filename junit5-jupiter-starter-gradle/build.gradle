@@ -1,6 +1,7 @@
 plugins {
 	id 'java'
 	id 'idea' // optional (to generate IntelliJ IDEA project files)
+	id 'jacoco'
 }
 
 // Dossier de build hors de OneDrive (OneDrive verrouille build/ et empêche Gradle de le vider)
@@ -20,5 +21,19 @@ test {
 	useJUnitPlatform()
 	testLogging {
 		events "passed", "skipped", "failed"
+
+	}
+	finalizedBy jacocoTestReport
+
+
+}
+
+jacocoTestReport {
+	dependsOn test
+	reports {
+		xml.required = true
+		html.outputLocation=layout.buildDirectory.dir('reports/jacoco/test')
+		// dossier et fichier de rangement par défaut, mais modifiable, comme par exemple :
+		// html.outputLocation=layout.projectDirectory.dir('reports/jacoco/test')
 	}
 }
