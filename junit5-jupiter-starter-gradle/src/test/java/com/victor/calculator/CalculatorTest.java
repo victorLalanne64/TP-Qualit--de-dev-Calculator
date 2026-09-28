@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Set;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CalculatorTest {
@@ -48,5 +50,17 @@ class CalculatorTest {
 
         // THEN
         assertThat(resultat).isEqualTo(5);
+    }
+
+    @Test
+    void ensembleChiffres_devrait_retourner_les_chiffres_sans_doublons() {
+        // GIVEN
+        Calculator calc = new Calculator();
+
+        // WHEN
+        Set<Integer> resultat = calc.ensembleChiffres(7679);
+
+        // THEN
+        assertThat(resultat).containsExactlyInAnyOrder(6, 7, 9);
     }
 }

@@ -1,5 +1,8 @@
 package com.victor.calculator;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Calculator {
 
     public static int add(int opG, int opD) {
@@ -12,5 +15,15 @@ public class Calculator {
 
     public static int divide(int opG, int opD) {
         return opG / opD;
+    }
+
+    public Set<Integer> ensembleChiffres(int pNombre) {
+        Set<Integer> chiffres = new HashSet<>();
+        String chaine = String.valueOf(Math.abs(pNombre));
+
+        for (char c : chaine.toCharArray()) {
+            chiffres.add(Character.getNumericValue(c));
+        }
+        return chiffres;
     }
 }
